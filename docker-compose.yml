@@ -1,0 +1,13 @@
+services:
+  router-stats:
+    build: .
+    container_name: router-stats
+    restart: unless-stopped
+    env_file: .env
+    ports:
+      - "${WEB_PORT:-8090}:8080"
+    volumes:
+      - router-stats-data:/data
+
+volumes:
+  router-stats-data:

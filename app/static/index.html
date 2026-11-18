@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Router-Stats</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand">
+    <h1>Router-Stats</h1>
+    <span id="model" class="muted"></span>
+  </div>
+  <div class="actions">
+    <span id="updated" class="muted small"></span>
+    <button id="btnRefresh" class="btn">Aktualisieren</button>
+    <button id="btnSpeed" class="btn primary">Speedtest starten</button>
+  </div>
+</header>
+
+<main>
+  <div id="errors" class="banner" hidden></div>
+
+  <section class="hero">
+    <div class="score card">
+      <div class="label">Gesamtbewertung</div>
+      <div class="score-num"><span id="score">–</span><small>/100</small></div>
+      <div id="scoreText" class="muted"></div>
+    </div>
+    <div class="tiles" id="tiles"></div>
+  </section>
+
+  <section class="card">
+    <h2>Analyse &amp; Empfehlungen</h2>
+    <ul id="findings" class="findings"></ul>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <h2>Verlauf</h2>
+      <div class="seg" id="range" role="group" aria-label="Zeitraum">
+        <button data-h="1">1 Std</button>
+        <button data-h="6">6 Std</button>
+        <button data-h="24" class="on">24 Std</button>
+        <button data-h="168">7 Tage</button>
+      </div>
+    </div>
+    <div class="grid">
+      <figure class="card chart"><figcaption>Internet-Auslastung <span class="muted">Mbit/s</span></figcaption><div class="cv"><canvas id="cWan"></canvas></div></figure>
+      <figure class="card chart"><figcaption>Latenz <span class="muted">ms</span></figcaption><div class="cv"><canvas id="cPing"></canvas></div></figure>
+      <figure class="card chart"><figcaption>Speedtests <span class="muted">Mbit/s</span></figcaption><div class="cv"><canvas id="cSpeed"></canvas></div></figure>
+      <figure class="card chart"><figcaption>DSL-Störabstand <span class="muted">dB</span></figcaption><div class="cv"><canvas id="cSnr"></canvas></div></figure>
+      <figure class="card chart"><figcaption>WLAN-Geräte <span class="muted">Anzahl</span></figcaption><div class="cv"><canvas id="cWlan"></canvas></div></figure>
+      <figure class="card chart"><figcaption>Paketverlust <span class="muted">%</span></figcaption><div class="cv"><canvas id="cLoss"></canvas></div></figure>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>Geräte im Netz <span id="devCount" class="muted"></span></h2>
+    <div class="table-wrap"><table id="devices"><thead><tr>
+      <th>Name</th><th>IP</th><th>Verbindung</th><th>Band</th><th>Signal</th><th class="num">Datenrate</th>
+    </tr></thead><tbody></tbody></table></div>
+  </section>
+
+  <div class="grid two">
+    <section class="card">
+      <h2>WLAN-Funknetze</h2>
+      <div class="table-wrap"><table id="radios"><thead><tr>
+        <th>SSID</th><th>Band</th><th class="num">Kanal</th><th>Standard</th><th>Autokanal</th><th class="num">Geräte</th>
+      </tr></thead><tbody></tbody></table></div>
+      <dl id="wlanExtras" class="kv"></dl>
+    </section>
+    <section class="card">
+      <h2>DSL-Leitung</h2>
+      <dl id="dsl" class="kv"></dl>
+    </section>
+  </div>
+
+  <section class="card">
+    <h2>Ereignisse</h2>
+    <ul id="events" class="events"></ul>
+  </section>
+</main>
+
+<footer class="muted small">Router-Stats · nur lesender Zugriff auf die FRITZ!Box · Messungen vom Docker-Host aus</footer>
+
+<script src="/static/vendor/chart.umd.min.js"></script>
+<script src="/static/app.js"></script>
+</body>
+</html>
